@@ -400,6 +400,21 @@ table th {
   transition: opacity 1000ms ease-in;
 }
 
+.contact-item {
+  animation: slideDown 0.6s ease forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .hide-sm {

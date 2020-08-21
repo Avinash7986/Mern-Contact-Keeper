@@ -12,7 +12,7 @@ export default (state, action) => {
   switch (action.type) {
     case ADD_CONTACT:
       return {
-        contacts: [...state.contacts, action.payload],
+        contacts: [action.payload, ...state.contacts],
       };
 
     case DELETE_CONTACT:
@@ -36,9 +36,27 @@ export default (state, action) => {
     case UPDATE_CONTACT: {
       return {
         ...state,
-        contacts: state.contacts.map(contact=>contact.id===action.payload.id ? action.payload:contact)
+        contacts: state.contacts.map((contact) =>
+          contact.id === action.payload.id ? action.payload : contact
+        ),
       };
     }
+
+    case FILTER_CONTACTS: {
+      return {
+        ...state,
+        filtered: state.contacts.filter((contact) => {
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return contact.name.match(regex) || contact.email.match(regex);
+        }),
+      };
+    }
+
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null,
+      };
     default:
       return state;
   }
