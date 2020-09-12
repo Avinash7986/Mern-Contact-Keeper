@@ -1,19 +1,18 @@
-import React, { useReducer } from 'react';
 import axios from 'axios';
-import authReducer from './authReducer';
-import AuthContext from './authContext';
-import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  CLEAR_ERRORS,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGOUT,
-} from '../types';
-
+import React, { useReducer } from 'react';
 import setAuthToken from '../../utils/setAuthToken';
+import {
+  AUTH_ERROR,
+  CLEAR_ERRORS,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  REGISTER_FAIL,
+  REGISTER_SUCCESS,
+  USER_LOADED,
+} from '../types';
+import AuthContext from './authContext';
+import authReducer from './authReducer';
 
 const AuthState = (props) => {
   const initialState = {
@@ -33,7 +32,7 @@ const AuthState = (props) => {
     }
 
     try {
-      const res = await axios.get('http://localhost:5000/api/auth');
+      const res = await axios.get('/api/auth');
       dispatch({
         type: USER_LOADED,
         payload: res.data,
@@ -54,11 +53,7 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post(
-        'http://localhost:5000/api/users',
-        formData,
-        config
-      );
+      const res = await axios.post('/api/users', formData, config);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
@@ -82,11 +77,7 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post(
-        'http://localhost:5000/api/auth',
-        formData,
-        config
-      );
+      const res = await axios.post('/api/auth', formData, config);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
