@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const xss = require('xss-clean');
 
 const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
@@ -12,6 +15,15 @@ const app = express();
 connectDB();
 
 app.use(express.json());
+
+// Prevent NoSql Injection or Sanitize data
+app.use(mongoSanitize());
+
+// Set Security Headers
+app.use(helmet());
+
+// Prevent XSS attacks means running js code in user input
+app.use(xss());
 
 app.use(cors());
 

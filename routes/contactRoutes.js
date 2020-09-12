@@ -66,7 +66,7 @@ router.post(
       res.status(201).send(contact);
     } catch (error) {
       console.log(error.message);
-      res.status(500).send('Server Error');
+      res.status(500).send({ msg: 'Server Error' });
     }
   }
 );
@@ -103,7 +103,7 @@ router.put(
       res.status(200).send(contact);
     } catch (error) {
       console.log(error.message);
-      res.status(500).send('Server Error');
+      res.status(500).send({ msg: 'Server Error' });
     }
   }
 );
@@ -129,7 +129,7 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json({ msg: 'Contact Deleted' });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send('Server Error');
+    res.status(500).send({ msg: 'Server Error' });
   }
 });
 
